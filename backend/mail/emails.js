@@ -1,6 +1,9 @@
 import { mailtrapClient, sender } from "./mailtrap.config.js";
-import { VERIFICATION_EMAIL_TEMPLATE } from "./emailTemplates.js";
-
+import {
+    PASSWORD_RESET_REQUEST_TEMPLATE,
+    PASSWORD_RESET_SUCCESS_TEMPLATE,
+    VERIFICATION_EMAIL_TEMPLATE,
+} from "./emailTemplates.js";
 
 export const sendVerificationEmail = async (email, verificationToken) => {
     const recipient = [{ email }];
@@ -26,7 +29,7 @@ export const sendVerificationEmail = async (email, verificationToken) => {
 };
 
 export const sendWelcomeEmail = async (email, name) => {
-    const recipient = [{email}]
+    const recipient = [{ email }];
 
     try {
         const response = await mailtrapClient.send({
@@ -38,10 +41,46 @@ export const sendWelcomeEmail = async (email, name) => {
             },
         });
         console.log(response);
-        
     } catch (error) {
         console.log(error);
-        throw new Error(error)
-        
+        throw new Error(error);
+    }
+};
+
+export const sendPasswordResetEmail = async (email, resetUrl) => {
+    const recipient = [{ email }];
+
+    try {
+        const response = await mailtrapClient.send({
+            from: sender,
+            to: recipient,
+            subject: "reset your password",
+            html: PASSWORD_RESET_REQUEST_TEMPLATE.replace(
+                "{resetURL}",
+                resetUrl
+            ),
+            category: "reset password",
+        });
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+};
+
+export const sendResetSuccessfulEmail = async (email) => {
+    const recipient = [{ email }];
+
+    try {
+        const response = await mailtrapClient.send({
+            from: sender,
+            to: recipient,
+            subject: "reset password successful",
+            html: PASSWORD_RESET_SUCCESS_TEMPLATE,
+            category: "password reset successful",
+        });
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
     }
 };
