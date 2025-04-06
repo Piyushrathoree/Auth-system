@@ -34,6 +34,7 @@ const Signup: React.FC = () => {
             throw new Error("please fill all the credentials");
         }
         try {
+            
             await signup({
                 name: formData.name,
                 email: formData.email,

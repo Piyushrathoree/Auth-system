@@ -12,6 +12,8 @@ export default function useFetchData() {
 
     async function signup(props: Props) {
         const { name, email, password } = props;
+        
+        
         if (!name || !email || !password) {
             throw new Error("entities not found ");
         }
@@ -21,6 +23,8 @@ export default function useFetchData() {
                 email,
                 password,
             });
+            console.log(response);
+            
             const data = response.data;
             return data;
         } catch (error) {
