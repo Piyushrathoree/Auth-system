@@ -10,6 +10,7 @@ import {
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
+import useFetchData from "@/hooks/useFetchData";
 
 const Signup: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ const Signup: React.FC = () => {
         email: "",
         password: "",
     });
+    const { signup } = useFetchData();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -26,10 +28,22 @@ const Signup: React.FC = () => {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!formData.email || !formData.name || !formData.password) {
+            throw new Error("please fill all the credentials");
+        }
+        try {
+            await signup({
+                name: formData.name,
+                email: formData.email,
+                password: formData.password,
+            });
 
-
+            setFormData({ name: "", email: "", password: "" });
+        } catch (error) {
+            throw new Error(`something went wrong ${error}`);
+        }
     };
 
     return (
@@ -53,7 +67,6 @@ const Signup: React.FC = () => {
                                 onChange={handleChange}
                                 placeholder="Enter your name"
                                 required
-                                
                             />
                         </div>
                         <div className="space-y-2">
