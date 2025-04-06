@@ -1,89 +1,59 @@
-
-
-import React, { useState } from "react";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "./components/ui/card";
-import { Input } from "./components/ui/input";
-import { Button } from "./components/ui/button";
-import { Label } from "./components/ui/label";
-
-const Signup: React.FC = () => {
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-    });
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log("Sign-up data:", formData);
-        // Add your sign-up logic here (e.g., API call)
-    };
-
-    return (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-            <Card className="w-full max-w-md">
-                <CardHeader>
-                    <CardTitle className="text-2xl">Sign Up</CardTitle>
-                    <CardDescription>
-                        Create your account to get started.
-                    </CardDescription>
-                </CardHeader>
-                <form onSubmit={handleSubmit}>
-                    <CardContent className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input
-                                id="email"
-                                name="email"
-                                type="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                placeholder="you@example.com"
-                                required
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="password">Password</Label>
-                            <Input
-                                id="password"
-                                name="password"
-                                type="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                placeholder="••••••••"
-                                required
-                            />
-                        </div>
-                    </CardContent>
-                    <CardFooter>
-                        <Button type="submit" className="w-full">
-                            Sign Up
-                        </Button>
-                    </CardFooter>
-                </form>
-            </Card>
-        </div>
-    );
-};
-
+import React from "react";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import { Routes, Route, Outlet, Link } from "react-router-dom";
+import HomePage from "./components/HomePage";
 
 const App: React.FC = () => {
     return (
-        <div>
-            <Signup />
-        </div>
+        <>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/login" element={<Login />} />
+                </Route>
+            </Routes>
+        </>
     );
 };
+
+function Layout() {
+    return (
+        <>
+            <nav
+                className="w-full flex h-[10vh] justify-center items-center  bg-gray-300
+            "
+            >
+                <ul className="flex gap-5">
+                    <Link
+                        to="/"
+                        className="shadow-sm  bg-gray-50 shadow-gray-700 px-4 py-[2px] font-semibold rounded-2xl hover:text-gray-800"
+                    >
+                        Home
+                    </Link>
+
+                    <Link
+                        to="Signup"
+                        className="shadow-sm  bg-gray-50 shadow-gray-700 px-4 py-[2px] font-semibold rounded-2xl hover:text-gray-800"
+                    >
+                        Signup
+                    </Link>
+
+                    <Link
+                        to="login"
+                        className="shadow-sm  bg-gray-50 shadow-gray-700 px-4 font-semibold py-[2px] rounded-2xl hover:text-gray-800"
+                    >
+                        Login
+                    </Link>
+                </ul>
+            </nav>
+
+            <div style={{ height: "80vh" }}>
+                <Outlet />
+            </div>
+        </>
+    );
+}
 
 export default App;
