@@ -81,8 +81,13 @@ export const loginUser = async (req, res) => {
 };
 
 export const logout = (_, res) => {
-    res.clearCookie("token");
-    res.status(200).json({ message: "User logged out successfully" });
+    const { token } = req.cookies;
+    if (!token) {
+        res.status(404).json({ message: "you're already logged out" });
+    } else {
+        res.clearCookie("token");
+        res.status(200).json({ message: "User logged out successfully" });
+    }
 };
 
 export const verifyEmail = async (req, res) => {
@@ -153,7 +158,7 @@ export const forgotPassword = async (req, res) => {
 
 export const resetPassword = async (req, res) => {
     const { token } = req.params;
-    const {password}= req.body
+    const { password } = req.body;
     if (!token) {
         return res
             .status(404)
@@ -167,14 +172,17 @@ export const resetPassword = async (req, res) => {
         return res.status(404).json({ message: "user not found" });
     }
     //update password
-    const hashPassword = await bcrypt.hash(password,10)
+    const hashPassword = await bcrypt.hash(password, 10);
 
-    user.password = hashPassword
+    user.password = hashPassword;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpiresAt = undefined;
-    user.save()
+    user.save();
 
-    await sendResetSuccessfulEmail(user.email)
+    await sendResetSuccessfulEmail(user.email);
 
-    res.status(200).json({success:true, message:"password reset successful"})
+    res.status(200).json({
+        success: true,
+        message: "password reset successful",
+    });
 };
