@@ -26,8 +26,8 @@ const Login: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Sign-up data:", formData);
-        // Add your sign-up logic here (e.g., API call)
+        
+        
     };
 
     return (

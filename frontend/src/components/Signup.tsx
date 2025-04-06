@@ -26,7 +26,11 @@ const Signup: React.FC = () => {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {};
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+
+    };
 
     return (
         <div className="h-[90vh] bg-gray-300 flex items-center justify-center p-4">
@@ -49,6 +53,7 @@ const Signup: React.FC = () => {
                                 onChange={handleChange}
                                 placeholder="Enter your name"
                                 required
+                                
                             />
                         </div>
                         <div className="space-y-2">
@@ -87,4 +92,4 @@ const Signup: React.FC = () => {
     );
 };
 
-export default Signup
+export default Signup;
