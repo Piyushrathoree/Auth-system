@@ -39,7 +39,7 @@ export const registerUser = async (req, res) => {
         sameSite: "strict",
     });
 
-    // await sendVerificationEmail(user.email, verificationToken);
+    await sendVerificationEmail(user.email, verificationToken);
     await user.save();
     res.status(200).json({
         message: "User registered successfully",
