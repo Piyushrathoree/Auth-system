@@ -12,8 +12,8 @@ import { Link } from "react-router-dom";
 
 const HomePage = () => {
     return (
-        <div className="w-full h-[90vh] flex items-center justify-center bg-gray-300">
-            <Card className="w-full max-w-md">
+        <div className="w-full h-[90vh] flex items-center justify-center bg-neutral-900 ">
+            <Card className="w-full max-w-md bg-transparent text-white">
                 <CardHeader>
                     <CardTitle className="text-2xl">
                         Get Started With Us!!
@@ -24,7 +24,7 @@ const HomePage = () => {
                 </CardHeader>
                 <CardFooter className="flex justify-center
                  items-center gap-4">
-                    <Button className="w-1/2" asChild>
+                    <Button className="w-1/2 bg-white" asChild>
                         <Link to="/signup">Sign Up</Link>
                     </Button>
                     <Button className="w-1/2" asChild>

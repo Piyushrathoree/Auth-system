@@ -48,8 +48,8 @@ const Signup: React.FC = () => {
     };
 
     return (
-        <div className="h-[90vh] bg-gray-300 flex items-center justify-center p-4">
-            <Card className="w-full max-w-md -m-[5vh]">
+        <div className="h-[90vh] bg-neutral-900 flex items-center justify-center p-4">
+            <Card className="w-full max-w-md -m-[5vh] bg-transparent text-white">
                 <CardHeader>
                     <CardTitle className="text-2xl">Signup</CardTitle>
                     <CardDescription>
@@ -96,7 +96,7 @@ const Signup: React.FC = () => {
                         </div>
                     </CardContent>
                     <CardFooter>
-                        <Button type="submit" className="w-full">
+                        <Button type="submit" className="w-full bg-white text-black hover:bg-white">
                             Sign Up
                         </Button>
                     </CardFooter>

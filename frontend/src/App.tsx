@@ -22,27 +22,27 @@ function Layout() {
     return (
         <>
             <nav
-                className="w-full flex h-[10vh] justify-center items-center  bg-gray-300
+                className="w-full flex h-[10vh] justify-center items-center  bg-neutral-900
             "
             >
                 <ul className="flex gap-5">
                     <Link
                         to="/"
-                        className="shadow-sm  bg-gray-50 shadow-gray-700 px-4 py-[2px] font-semibold rounded-2xl hover:text-gray-800"
+                        className="shadow-sm  bg-transparent shadow-white text-white px-4 py-[2px] font-semibold rounded-2xl "
                     >
                         Home
                     </Link>
 
                     <Link
                         to="Signup"
-                        className="shadow-sm  bg-gray-50 shadow-gray-700 px-4 py-[2px] font-semibold rounded-2xl hover:text-gray-800"
+                        className="shadow-sm  bg-transparent shadow-white text-white px-4 py-[2px] font-semibold rounded-2xl "
                     >
                         Signup
                     </Link>
 
                     <Link
                         to="login"
-                        className="shadow-sm  bg-gray-50 shadow-gray-700 px-4 font-semibold py-[2px] rounded-2xl hover:text-gray-800"
+                        className="shadow-sm  bg-transparent shadow-white px-4 text-white font-semibold py-[2px] rounded-2xl "
                     >
                         Login
                     </Link>
