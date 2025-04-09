@@ -10,14 +10,15 @@ import {
 } from "../mail/emails.js";
 
 export const registerUser = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name , email, password } = req.body;
     if (!name || !email || !password) {
         return res.status(400).send("Please fill all the fields");
     }
 
     let existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(401).send("User already exists");
-
+    if (existingUser) return res.status(409).send("User already exists");
+    console.log("yaha tak chal gya code" );
+    
     const hashPassword = await bcrypt.hash(password, 10);
     const verificationToken = generateVerificationCode();
 
@@ -38,7 +39,7 @@ export const registerUser = async (req, res) => {
         sameSite: "strict",
     });
 
-    await sendVerificationEmail(user.email, verificationToken);
+    // await sendVerificationEmail(user.email, verificationToken);
     await user.save();
     res.status(200).json({
         message: "User registered successfully",

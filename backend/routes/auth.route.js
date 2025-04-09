@@ -11,6 +11,10 @@ import verifyToken from "../middleware/verifyToken.middleware.js";
 
 const router = Router();
 
+router.get("/",(req,res)=>{
+    res.send("<h1>hello this server is running </h1>")
+})
+
 router.get("/check-auth", verifyToken, (req, res) => {
     const user = req.user;
     res.status(200).json({
