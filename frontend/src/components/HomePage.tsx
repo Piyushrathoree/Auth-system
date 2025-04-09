@@ -22,12 +22,20 @@ const HomePage = () => {
                         Create your account to get started or Login
                     </CardDescription>
                 </CardHeader>
-                <CardFooter className="flex justify-center
-                 items-center gap-4">
-                    <Button className="w-1/2 bg-white" asChild>
+                <CardFooter
+                    className="flex justify-center
+                 items-center gap-4"
+                >
+                    <Button
+                        className="w-1/2 bg-white text-black hover:bg-white/90"
+                        asChild
+                    >
                         <Link to="/signup">Sign Up</Link>
                     </Button>
-                    <Button className="w-1/2" asChild>
+                    <Button
+                        className="w-1/2 bg-white text-black hover:bg-white/90"
+                        asChild
+                    >
                         <Link to="/login">Login</Link>
                     </Button>
                 </CardFooter>
